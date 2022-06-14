@@ -1,7 +1,7 @@
 const constants = {
-    factoryAddress: '0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f',
-    startingBlock: 1,
-    blockJump: 1
+    factoryAddress: '0x735f252e5C64d9C3d3d3395be1A048a7C47E0102',
+    startingBlock: 10851556,
+    blockJump: 5
 }
 
 export default constants;
