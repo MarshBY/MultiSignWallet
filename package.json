@@ -7,12 +7,14 @@
     "serve": "nodemon server.js",
     "start": "node server.js",
     "dev": "webpack serve --open",
-    "build": "webpack"
+    "build": "SET NODE_ENV=production & webpack"
   },
   "author": "0xYee",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-waffle": "^2.0.3",

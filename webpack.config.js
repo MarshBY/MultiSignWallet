@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
 const mode = 'production'; //'development'
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
                     options: {
                         cacheDirectory: true,
                         cacheCompression: false,
-                        envName: 'development'
+                        envName: 'production'
                     }
                 }
             },
@@ -44,6 +44,6 @@ module.exports = {
         extensions: [".js", ".jsx"]
     },
     plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
-    watch: true,
-    devtool: 'eval-source-map'
+    watch: mode == 'development',
+    //devtool: 'eval' //'source-map' //'eval-source-map'
 };
