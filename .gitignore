@@ -5,4 +5,5 @@ public
 Proxy.sol
 
 cache
-artifacts
+
+hardhat.config.js
