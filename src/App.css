@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+}
+
+.main {
+    height: calc(100vh - 70px);
+    width: 100%;
+    display: flex;
+}

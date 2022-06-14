@@ -1,0 +1,33 @@
+.sidebar_container {
+    width: 200px;
+    min-width: 200px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+
+    border-right: solid 1px rgba(0, 0, 0, 0.25);
+    
+    overflow-y: auto;
+}
+
+.sidebar_container h1 {
+    margin-bottom: 10px;
+}
+
+.wallet_container {
+    display: flex;
+    user-select: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.wallet_container.selected {
+    background-color: gray;
+}
+
+.wallet_container h2 {
+    width: 100%;
+}

@@ -1,0 +1,15 @@
+.tx_holder {
+    padding: 20px;
+    text-align: center;
+}
+
+.tx_holder h1 {
+    margin-top: 5px;
+}
+
+.to_address {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}

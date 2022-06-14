@@ -1,0 +1,68 @@
+.wallet_create_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.paper_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection_container {
+    display: flex;
+    margin-left: auto;
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.steps {
+    max-width: 18vw;
+    min-width: 200px;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.signer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.eth_select {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.eth_select h3 {
+    margin-right: 10px;
+}
+
+.confirmations_selector {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.confirmations_selector p {
+    margin-left: 10px;
+}
+
+.buttons_holder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}

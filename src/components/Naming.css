@@ -1,0 +1,6 @@
+.naming_holder {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
