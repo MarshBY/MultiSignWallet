@@ -12,7 +12,7 @@ const Deposit = (props) => {
     const signer = useContext(Signer)
 
     const [eth, setEth] = useState();
-    const [balance, setBalance] = useState('');
+    const [balance, setBalance] = useState();
 
     const handleConfirm = async () => {
         if(eth <= 0 || eth > balance) return;
@@ -21,17 +21,19 @@ const Deposit = (props) => {
             to: props.address,
             value: ethers.utils.parseEther(eth.toString())
         })
+
+        props.setDepositing(false);
+        
         const receipt = await tx.wait();
         console.log(receipt);
 
         //GetBalance in Wallet
         props.getBalance();
-        props.setDepositing(false);
     }
 
     const getBalance = async () => {
         const balance = await signer.getBalance()
-        setBalance(parseInt(ethers.utils.formatEther(balance.toString())));
+        setBalance(parseFloat(ethers.utils.formatEther(balance.toString())));
     }
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const Deposit = (props) => {
                 <Paper>
                     <div className="deposit_holder">
                         <h1>Deposit ETH</h1>
-                        <TextField error={eth <= 0 || eth > balance} helperText={eth <= 0 ? 'Wrong Value' : (eth > balance ? 'Not enough balance' : '')} type='number' label='ETH' value={eth} onChange={e => setEth(e.target.value)}></TextField>
+                        <TextField error={eth <= 0 || eth > balance} helperText={eth <= 0 ? 'Wrong Value' : (eth > balance ? 'Not enough balance' : '')} type='number' label='ETH' value={eth} onChange={e => setEth(parseFloat(e.target.value))}></TextField>
                         <Button disabled={eth <= 0 || eth > balance || !eth} fullWidth sx={{marginTop: '20px'}} variant='contained' onClick={handleConfirm}>Deposit</Button>
                     </div>
                 </Paper>

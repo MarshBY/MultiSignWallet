@@ -14,6 +14,7 @@ import { useCookies } from "react-cookie";
 import Naming from "../components/Naming";
 import TextField from "@mui/material/TextField"
 import CheckIcon from '@mui/icons-material/Check';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const Wallet = (props) => {
 
@@ -77,6 +78,7 @@ const Wallet = (props) => {
     }
 
     const getBalance = async () => {
+        console.log('Getting balances')
         const latest = await signer.provider.getBlock();
 
         let balances = []
@@ -85,10 +87,11 @@ const Wallet = (props) => {
         let last = -1;
         for (let block = props.wallet.blockCreated; block <= latest.number; block += constants.blockJump) {
             const bal = await signer.provider.getBalance(props.wallet.address, block);
-            if(bal.toString() != last.toString()){
-                if(last != -1 ){
+            console.log('bal', bal);
+            if (bal.toString() != last.toString()) {
+                if (last != -1) {
                     balances.push({
-                        block: (block-1).toString(),
+                        block: (block - 1).toString(),
                         balance: parseFloat(ethers.utils.formatEther(last))
                     })
                 }
@@ -109,7 +112,7 @@ const Wallet = (props) => {
             })
         }
 
-        console.log(balances);
+        console.log('Balances', balances);
         setBalances(balances)
     }
 
@@ -135,7 +138,7 @@ const Wallet = (props) => {
                 props.setOpenNotif({ open: true, message: 'Transaction Executed' });
                 getTransactions();
                 getBalance();
-            }catch(err) {
+            } catch (err) {
                 alert(err);
             }
         }
@@ -159,7 +162,7 @@ const Wallet = (props) => {
                 }, {})
             }
         );
-        
+
         props.setWallets(prev => prev.map((wall, i) => (
             i == props.selected
                 ? { ...wall, name: newName }
@@ -191,6 +194,11 @@ const Wallet = (props) => {
         <div className='main_wallet_flex'>
             <div className="wallet_header">
                 <div className="wallet_name">
+                    <ContentCopyIcon onClick={() => {
+                        navigator.clipboard.writeText(props.wallet.address)
+                            .then(() => console.log('Copied to Clipboard'))
+                            .catch(err => console.log('Error copying to clipboard', err))
+                    }} sx={{ cursor: 'pointer', marginRight: '10px' }} ></ContentCopyIcon>
                     <h1>{props.wallet.name}</h1>
                     <EditIcon onClick={handleEditName} sx={{ cursor: 'pointer' }}></EditIcon>
                 </div>
@@ -202,24 +210,27 @@ const Wallet = (props) => {
 
                     <div className="wallet_info_container">
                         <h1>Balance: {balances.length > 0 && balances[balances.length - 1].balance} ETH</h1>
-                        <Line
-                            data={balances}
-                            xField='block'
-                            yField='balance'
-                            point={{
-                                size: 5,
-                                shape: 'diamond'
-                            }}
-                            meta={{
-                                block: {
-                                    type: 'linear'
-                                }
-                            }}
-                            smooth={false}
-                            height={250}
-                            padding='auto'
-                            width={650}
-                        />
+                        {balances.length == 0
+                            ? <h2>LOADING...</h2>
+                            : <Line
+                                data={balances}
+                                xField='block'
+                                yField='balance'
+                                point={{
+                                    size: 5,
+                                    shape: 'diamond'
+                                }}
+                                meta={{
+                                    block: {
+                                        type: 'linear'
+                                    }
+                                }}
+                                smooth={false}
+                                height={250}
+                                padding='auto'
+                                width={650}
+                            />
+                        }
                     </div>
                 </Paper>
                 <Paper elevation={4} sx={{ gridColumnStart: 1, gridColumnEnd: 5, gridRowStart: 2, padding: '10px' }}>
@@ -329,7 +340,7 @@ const Wallet = (props) => {
                                             {tx.id}
                                         </TableCell>
                                         <TableCell>
-                                        <a href={'https://etherscan.io/address/' + tx.to}>{tx.to.substring(0, 12) + '...' + tx.to.substring(tx.to.length - 10, tx.to.length)}</a>
+                                            <a href={'https://etherscan.io/address/' + tx.to}>{tx.to.substring(0, 12) + '...' + tx.to.substring(tx.to.length - 10, tx.to.length)}</a>
                                         </TableCell>
                                         <TableCell>
                                             {ethers.utils.formatEther(tx.value)}

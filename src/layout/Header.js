@@ -57,7 +57,7 @@ const Header = (props) => {
 
     return(
         <div className="header_container">
-            <h1>LOGO</h1>
+            <h1>MultiSignWallet</h1>
             <div className="account_container">
                 <p>{balance != null && `${balance} ETH`}</p>
                 <Button sx={{backgroundColor: '#2b78af', borderRadius: '14px', color: 'white'}} variant='contained' onClick={handleAccountClick}>{account ? account.substring(0,6) + '...' + account.substring(account.length - 4, account.length) : "Connect Wallet"}</Button>
